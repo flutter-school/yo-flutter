@@ -21,6 +21,7 @@ dependencies:
   cloud_firestore: 0.8.2+3
   firebase_messaging: 2.1.0
   http: 0.12.0
+  scoped_model: ^1.0.1
 
 dev_dependencies:
   flutter_test:

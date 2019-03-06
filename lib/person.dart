@@ -1,16 +1,15 @@
 class Person {
   static const REF = "people";
 
+  Person(this.uid, this.name, this.photoUrl);
+
   String uid;
   String name;
   String photoUrl;
 
-  Person(this.uid, this.name, this.photoUrl);
-
-  Person.fromJson(Map<String, dynamic> data)
-      : uid = data['uid'],
-        name = data['name'],
-        photoUrl = data['photoUrl'];
+  factory Person.fromJson(Map<String, dynamic> data) {
+    return Person(data['uid'], data['name'], data['photoUrl']);
+  }
 
   Map<String, String> toJson() {
     return {
@@ -19,4 +18,16 @@ class Person {
       'photoUrl': photoUrl,
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Person &&
+          runtimeType == other.runtimeType &&
+          uid == other.uid &&
+          name == other.name &&
+          photoUrl == other.photoUrl;
+
+  @override
+  int get hashCode => uid.hashCode ^ name.hashCode ^ photoUrl.hashCode;
 }

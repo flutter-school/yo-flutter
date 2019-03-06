@@ -2,10 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:yo/home_page.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:yo/friends_page.dart';
 import 'package:yo/person.dart';
+import 'package:yo/user_model.dart';
 
 class LoginPage extends StatefulWidget {
+  static const ROUTE_NAME = "/login";
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -35,18 +39,13 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Color(0xFF6C5B7B),
         body: Container(
           child: Center(
-            child: Text("Yo!",
-                style: Theme.of(context)
-                    .textTheme
-                    .display4
-                    .copyWith(fontWeight: FontWeight.bold)),
+            child: Text("Yo!", style: Theme.of(context).textTheme.display4.copyWith(fontWeight: FontWeight.bold)),
           ),
         ),
         bottomNavigationBar: SizedBox(
           height: 64,
           child: Center(
-            child:
-                _isLoading ? CircularProgressIndicator() : _buildSignInButton(),
+            child: _isLoading ? CircularProgressIndicator() : _buildSignInButton(),
           ),
         ),
       ),
@@ -59,33 +58,11 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      final user = await _handleSignIn();
-      await _saveUserToDatabase(user);
-
-      Navigator.of(context).pushReplacementNamed(HomePage.ROUTE_NAME);
+      await ScopedModel.of<UserModel>(context).googleLogin();
     } catch (e) {
       setState(() {
         _isLoading = false;
       });
     }
-  }
-
-  Future<FirebaseUser> _handleSignIn() async {
-    GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-    FirebaseUser user = await FirebaseAuth.instance.signInWithGoogle(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    return user;
-  }
-
-  Future<void> _saveUserToDatabase(FirebaseUser user) {
-    Person signedInUser = Person(user.uid, user.displayName, user.photoUrl);
-    return Firestore.instance
-        .collection(Person.REF)
-        .document(user.uid)
-        .setData(signedInUser.toJson());
   }
 }
