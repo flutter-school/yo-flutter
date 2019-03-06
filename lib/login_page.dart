@@ -53,18 +53,21 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _onSignInClicked() {
+  void _onSignInClicked() async {
     setState(() {
       _isLoading = true;
     });
 
-    _handleSignIn().then(_saveUserToDatabase).then((_) {
+    try {
+      final user = await _handleSignIn();
+      await _saveUserToDatabase(user);
+
       Navigator.of(context).pushReplacementNamed(HomePage.ROUTE_NAME);
-    }).catchError((error) {
+    } catch (e) {
       setState(() {
         _isLoading = false;
       });
-    });
+    }
   }
 
   Future<FirebaseUser> _handleSignIn() async {
