@@ -1,15 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:yo/friends_page.dart';
-import 'package:yo/person.dart';
-import 'package:yo/user_model.dart';
+import 'package:yo/session_model.dart';
 
 class LoginPage extends StatefulWidget {
-  static const ROUTE_NAME = "/login";
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -58,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      await ScopedModel.of<UserModel>(context).googleLogin();
+      await ScopedModel.of<SessionModel>(context).googleLogin();
     } catch (e) {
       setState(() {
         _isLoading = false;

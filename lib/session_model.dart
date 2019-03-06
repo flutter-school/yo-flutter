@@ -9,11 +9,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/person.dart';
 
-class UserModel extends Model {
+class SessionModel extends Model {
   /// Easy access to this model using [ScopedModel.of]
-  static UserModel of(BuildContext context) => ScopedModel.of<UserModel>(context);
+  static SessionModel of(BuildContext context) => ScopedModel.of<SessionModel>(context);
 
-  UserModel() {
+  SessionModel() {
     _autoLogin();
   }
 

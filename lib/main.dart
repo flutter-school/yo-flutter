@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/friends_page.dart';
 import 'package:yo/login_page.dart';
-import 'package:yo/user_model.dart';
+import 'package:yo/session_model.dart';
 
 Future<void> main() async {
-  UserModel loginModel = UserModel();
-  runApp(ScopedModel<UserModel>(
+  SessionModel loginModel = SessionModel();
+  runApp(ScopedModel<SessionModel>(
     model: loginModel,
-    child: MyApp(),
+    child: YoApp(),
   ));
 }
 
-class MyApp extends StatelessWidget {
+class YoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,12 +21,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         accentColor: Color(0xFFF67280),
       ),
-      routes: {
-        FriendsPage.ROUTE_NAME: (context) => FriendsPage(),
-        LoginPage.ROUTE_NAME: (context) => LoginPage(),
-      },
-      home: new ScopedModelDescendant<UserModel>(
-        builder: (BuildContext context, Widget child, UserModel model) {
+      home: new ScopedModelDescendant<SessionModel>(
+        builder: (BuildContext context, Widget child, SessionModel model) {
           if (!model.initialized) {
             // kind of splash screen, before we know if the user is signed in or not
             return Splash();

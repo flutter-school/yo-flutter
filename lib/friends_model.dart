@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/person.dart';
-import 'package:yo/user_model.dart';
+import 'package:yo/session_model.dart';
 
 class FriendsModel extends Model {
   /// Easy access to this model using [ScopedModel.of]
@@ -18,7 +18,7 @@ class FriendsModel extends Model {
 
   bool get isLoading => _friends == null;
 
-  UserModel userModel;
+  SessionModel userModel;
 
   DateTime _lastYoSent = DateTime(0);
 

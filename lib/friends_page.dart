@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/friends_model.dart';
 import 'package:yo/person.dart';
-import 'package:yo/user_model.dart';
+import 'package:yo/session_model.dart';
 
 class FriendsPage extends StatefulWidget {
-  static const ROUTE_NAME = "/home";
-
   @override
   _FriendsPageState createState() => _FriendsPageState();
 }
@@ -16,7 +14,7 @@ class _FriendsPageState extends State<FriendsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userModel = ScopedModel.of<UserModel>(context, rebuildOnChange: false);
+    final userModel = ScopedModel.of<SessionModel>(context, rebuildOnChange: false);
     if (model == null || model.userModel != userModel) {
       model = FriendsModel(userModel);
     }
@@ -86,7 +84,7 @@ class _FriendsPageStateContent extends State<_FriendsPageContent> with SingleTic
               SizedBox(width: 24),
               Flexible(
                 child: Text(
-                  _extractFirstName(person.name),
+                  person.possibleFirstName(),
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.title.copyWith(fontSize: 32, letterSpacing: 2),
                 ),
@@ -126,20 +124,12 @@ class _FriendsPageStateContent extends State<_FriendsPageContent> with SingleTic
         padding: const EdgeInsets.all(8.0),
         child: RaisedButton(
           onPressed: () {
-            ScopedModel.of<UserModel>(context).logout();
+            ScopedModel.of<SessionModel>(context).logout();
           },
           child: Text("Logout", style: Theme.of(context).textTheme.title.copyWith(fontSize: 24, letterSpacing: 2)),
         ),
       ),
     );
-  }
-
-  String _extractFirstName(String displayName) {
-    if (displayName.indexOf(" ") > 0) {
-      return displayName.toUpperCase().substring(0, displayName.indexOf(" "));
-    } else {
-      return displayName.toUpperCase();
-    }
   }
 
   void _showSnackbar(String text) {

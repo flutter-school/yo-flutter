@@ -19,6 +19,14 @@ class Person {
     };
   }
 
+  String possibleFirstName() {
+    if (name.indexOf(" ") > 0) {
+      return name.toUpperCase().substring(0, name.indexOf(" "));
+    } else {
+      return name.toUpperCase();
+    }
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
