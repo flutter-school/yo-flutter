@@ -11,7 +11,8 @@ import 'package:yo/person.dart';
 
 class SessionModel extends Model {
   /// Easy access to this model using [ScopedModel.of]
-  static SessionModel of(BuildContext context) => ScopedModel.of<SessionModel>(context);
+  static SessionModel of(BuildContext context) =>
+      ScopedModel.of<SessionModel>(context);
 
   SessionModel() {
     _autoLogin();
@@ -58,7 +59,10 @@ class SessionModel extends Model {
 
   Future<void> _saveToDatabase(FirebaseUser user) {
     Person signedInUser = Person(user.uid, user.displayName, user.photoUrl);
-    return Firestore.instance.collection(Person.REF).document(user.uid).setData(signedInUser.toJson());
+    return Firestore.instance
+        .collection(Person.REF)
+        .document(user.uid)
+        .setData(signedInUser.toJson());
   }
 
   Future<void> _registerPush() async {
@@ -66,7 +70,10 @@ class SessionModel extends Model {
       throw "Not implemented";
     }
     final fmToken = await FirebaseMessaging().getToken();
-    Firestore.instance.collection("tokens").document(_user.uid).setData({'token': fmToken});
+    Firestore.instance
+        .collection("tokens")
+        .document(_user.uid)
+        .setData({'token': fmToken});
     print("registered firebase messaging for ${_user.email}");
   }
 }

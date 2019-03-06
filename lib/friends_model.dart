@@ -7,7 +7,8 @@ import 'package:yo/session_model.dart';
 
 class FriendsModel extends Model {
   /// Easy access to this model using [ScopedModel.of]
-  static FriendsModel of(BuildContext context) => ScopedModel.of<FriendsModel>(context);
+  static FriendsModel of(BuildContext context) =>
+      ScopedModel.of<FriendsModel>(context);
 
   FriendsModel(this.userModel) {
     _loadFriends();
@@ -30,12 +31,14 @@ class FriendsModel extends Model {
       throw SpammyException();
     }
     _lastYoSent = DateTime.now();
-    await http.get('https://us-central1-yo-flutter-80f0f.cloudfunctions.net/sendYo?'
-        'fromUid=${userModel.uid}&toUid=${person.uid}');
+    await http
+        .get('https://us-central1-yo-flutter-80f0f.cloudfunctions.net/sendYo?'
+            'fromUid=${userModel.uid}&toUid=${person.uid}');
   }
 
   Future<void> _loadFriends() async {
-    final stream = Firestore.instance.collection(Person.REF).orderBy("name").snapshots();
+    final stream =
+        Firestore.instance.collection(Person.REF).orderBy("name").snapshots();
     stream.listen((QuerySnapshot snapshot) {
       _friends = snapshot.documents.map((data) => Person.fromJson(data.data));
       notifyListeners();

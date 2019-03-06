@@ -32,13 +32,18 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Color(0xFF6C5B7B),
         body: Container(
           child: Center(
-            child: Text("Yo!", style: Theme.of(context).textTheme.display4.copyWith(fontWeight: FontWeight.bold)),
+            child: Text("Yo!",
+                style: Theme.of(context)
+                    .textTheme
+                    .display4
+                    .copyWith(fontWeight: FontWeight.bold)),
           ),
         ),
         bottomNavigationBar: SizedBox(
           height: 64,
           child: Center(
-            child: _isLoading ? CircularProgressIndicator() : _buildSignInButton(),
+            child:
+                _isLoading ? CircularProgressIndicator() : _buildSignInButton(),
           ),
         ),
       ),

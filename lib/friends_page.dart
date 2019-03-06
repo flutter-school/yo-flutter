@@ -14,7 +14,8 @@ class _FriendsPageState extends State<FriendsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userModel = ScopedModel.of<SessionModel>(context, rebuildOnChange: false);
+    final userModel =
+        ScopedModel.of<SessionModel>(context, rebuildOnChange: false);
     if (model == null || model.userModel != userModel) {
       model = FriendsModel(userModel);
     }
@@ -32,7 +33,8 @@ class _FriendsPageContent extends StatefulWidget {
   _FriendsPageStateContent createState() => _FriendsPageStateContent();
 }
 
-class _FriendsPageStateContent extends State<_FriendsPageContent> with SingleTickerProviderStateMixin {
+class _FriendsPageStateContent extends State<_FriendsPageContent>
+    with SingleTickerProviderStateMixin {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   List<Color> _colors = [
@@ -53,7 +55,8 @@ class _FriendsPageStateContent extends State<_FriendsPageContent> with SingleTic
       floatingActionButton: FloatingActionButton(
           backgroundColor: Color(0xFFF67280),
           child: Icon(Icons.share),
-          onPressed: () => _showSnackbar("Please tell your friends about this app in real life 💬")),
+          onPressed: () => _showSnackbar(
+              "Please tell your friends about this app in real life 💬")),
     );
   }
 
@@ -86,7 +89,10 @@ class _FriendsPageStateContent extends State<_FriendsPageContent> with SingleTic
                 child: Text(
                   person.possibleFirstName(),
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.title.copyWith(fontSize: 32, letterSpacing: 2),
+                  style: Theme.of(context)
+                      .textTheme
+                      .title
+                      .copyWith(fontSize: 32, letterSpacing: 2),
                 ),
               ),
             ],
@@ -110,7 +116,8 @@ class _FriendsPageStateContent extends State<_FriendsPageContent> with SingleTic
             if (index >= model.friends.length) {
               return _logoutButton();
             }
-            return _buildListItem(model.friends[index], _colors[(index + 2) % 6]);
+            return _buildListItem(
+                model.friends[index], _colors[(index + 2) % 6]);
           },
           itemCount: model.friends.length + 1,
         );
@@ -126,7 +133,11 @@ class _FriendsPageStateContent extends State<_FriendsPageContent> with SingleTic
           onPressed: () {
             ScopedModel.of<SessionModel>(context).logout();
           },
-          child: Text("Logout", style: Theme.of(context).textTheme.title.copyWith(fontSize: 24, letterSpacing: 2)),
+          child: Text("Logout",
+              style: Theme.of(context)
+                  .textTheme
+                  .title
+                  .copyWith(fontSize: 24, letterSpacing: 2)),
         ),
       ),
     );
