@@ -10,11 +10,18 @@ Basically Yo! written in Flutter. Done in a three hour workshop with people who 
 
 If you would like to compile the code and run the app on your machine, you will have to create a new Firebase project and make sure to add the following files:
 
-`ios/Runner/GoogleService-Info.plist`
+1. Create a new firebase project https://console.firebase.google.com
+2. Register the ios and android application 
+   
+On Android, register the SHA-1 of your local certificate to Firebase to make Google Sign-In work.
+> `keytool -exportcert -list -v \
+-alias androiddebugkey -keystore ~/.android/debug.keystore`
 
-`android/app/google-services.json`  
+and download the firebase configuration files to
+- `ios/Runner/GoogleService-Info.plist`
+- `android/app/google-services.json`  
 
-Also add the SHA-1 of your local certificate to Firebase when you register the Android app in order to make the Google Sign-In work.
+3. Setup Firebase Authentication: Go to `Develop -> Authentication` and set up sign-in method  
 
 On iOS you need to edit `ios/Runner/Info.plist` and paste in your `REVERSED_CLIENT_ID`.
 
