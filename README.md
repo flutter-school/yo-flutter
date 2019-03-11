@@ -19,6 +19,46 @@ You've finished this lessen if you see
 
 ## Lesson 2
 
+Create the list layout of your friends. Use the screenshot above as reference.
+
+1. Create a `FriendsPage` widget. "Screen" are called "Pages" in Flutter.
+2. Use the [`ListView.builder`](https://docs.flutter.io/flutter/widgets/ListView-class.html) widget to show the items. 
+For now, you can use the following data:
+```dart
+final List<Person> friends = [
+  Person("aaaa", "Frederik Schweiger", "https://lh3.googleusercontent.com/HJalMgJTCQ_Tf3OJrYLrUEYDuY2hQ6vw16Nw9RexsoQyJtl3TaduDICztFsV3-OeGTQqnlOIZlwk9q0=s360-rw-no"),
+  Person("bbbb", "Pascal Welsch", "https://lh3.googleusercontent.com/GtJbCj84PLL8BLTORq_9MDxTR-UUFxwjY7h9dQRZcRrhxQlizifGWE9fZf6hVtlHcx3YSATWhA7qO8M=s360-rw-no"),
+  Person("cccc", "Georg Bednorz", "https://lh3.googleusercontent.com/s4jjTjRsseMEaHhGUYLehPvatrs5h-DDUI7TcJh5RZYUCk73Ggh60IGEXYcxhW795IikC-LN3E9y-1o=s360-rw-no"),
+  Person("dddd", "Seth Ladd", "https://pbs.twimg.com/profile_images/986316447293952000/oZWVUWDs_400x400.jpg"),
+  Person("eeee", "Tim Sneath", "https://pbs.twimg.com/profile_images/653618067084218368/XlQA-oRl_400x400.jpg"),
+];
+```
+
+## Lesson 3
+
+Build the login screen with [scoped_model](https://github.com/brianegan/scoped_model/)
+
+
+## Lesson 4
+
+Setup firebase
+
+- Create Android and iOS apps.
+- Enable Google Authentication
+- Deploy firebase functions
+
+## Lesson 5
+
+Show real users form firebase
+
+## Lesson 6
+
+Send push notifications
+
+Caution: 
+- You won't see a notification if the app is in foreground
+- Test on a real device, not the emulator/simulator
+- 
 
 
 ## How to build the app
