@@ -1,0 +1,23 @@
+{
+  "project_info": {
+    "project_number": "123456",
+    "project_id": "yo-flutter-XXX",
+    "storage_bucket": "yo-flutter-XXX.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757213870837:android:000dc919648cacf3",
+        "android_client_info": {
+          "package_name": "school.flutter.yo"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9wiV_add_your_own"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}
