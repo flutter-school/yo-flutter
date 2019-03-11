@@ -4,6 +4,23 @@
 
 Basically Yo! written in Flutter. Done in a three hour workshop with people who never used Flutter before 🍻
 
+## Lesson 1
+
+- Clone the project `git clone git@github.com:flutterschool/yo-flutter.git` and 
+- run it `flutter run`
+
+Flutter install instructions: 
+- https://flutter.dev/docs/get-started/install
+- https://flutter.dev/docs/get-started/editor
+
+If you have trouble setting up flutter, ask for support
+
+You've finished this lessen if you see 
+
+## Lesson 2
+
+
+
 ## How to build the app
 
 > Are you in a hurry and just want to check out the end-result on your phone? In the [releases tab](https://github.com/flschweiger/yo-flutter/releases/tag/1.0) you will find a precompiled APK to download 🚀

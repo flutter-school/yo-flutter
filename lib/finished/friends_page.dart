@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:yo/friends_model.dart';
-import 'package:yo/person.dart';
-import 'package:yo/session_model.dart';
+import 'package:yo/finished/friends_model.dart';
+import 'package:yo/finished/person.dart';
+import 'package:yo/finished/session_model.dart';
 
 class FriendsPage extends StatefulWidget {
   @override
