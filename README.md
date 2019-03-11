@@ -6,7 +6,7 @@ Basically Yo! written in Flutter. Done in a three hour workshop with people who 
 
 ## Lesson 1
 
-- Clone the project `git clone git@github.com:flutterschool/yo-flutter.git` and 
+- Clone the project `git clone git@github.com:flutter-school/yo-flutter.git` and 
 - run it `flutter run`
 
 Flutter install instructions: 
