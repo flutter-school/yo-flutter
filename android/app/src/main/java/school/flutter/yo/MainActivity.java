@@ -1,4 +1,4 @@
-package net.flschweiger.yo;
+package school.flutter.yo;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
