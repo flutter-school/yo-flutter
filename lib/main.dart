@@ -33,8 +33,9 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final content = <Widget>[
-      Image.network(
-        "https://flutter.school/assets/images/image01.png",
+      FadeInImage.assetNetwork(
+        placeholder: "assets/transparent.png",
+        image: "https://flutter.school/assets/images/image01.png",
         width: 96,
         height: 96,
       ),
@@ -50,9 +51,11 @@ class _SplashState extends State<Splash> {
         "Welcome student!",
         style: theme.textTheme.subtitle.copyWith(color: Colors.black45),
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 48.0),
-        child: mastered ? _finished(context) : _fab(context),
+      Flexible(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 48.0),
+          child: mastered ? _finished(context) : _fab(context),
+        ),
       )
     ];
 
@@ -62,7 +65,7 @@ class _SplashState extends State<Splash> {
         child: Card(
           color: Colors.white,
           child: AnimatedContainer(
-            constraints: BoxConstraints.tight(Size(340, mastered ? 430 : 400)),
+            height: mastered ? 450 : 400,
             curve: Curves.easeInOutCubic,
             duration: Duration(milliseconds: 200),
             child: Padding(
@@ -88,12 +91,15 @@ class _SplashState extends State<Splash> {
 
   Widget _finished(BuildContext context) {
     final textStyle =
-        Theme.of(context).textTheme.subtitle.copyWith(color: Colors.black45);
+        Theme.of(context).textTheme.subhead.copyWith(color: Colors.black45);
     return WillPopScope(
-      child: Text(
-        "Congrationaltions 🎉\n\n\nYou've finished Lesson 1 ",
-        textAlign: TextAlign.center,
-        style: textStyle,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Congrationaltions 🎉\n\n\nYou've finished Lesson 1 ",
+          textAlign: TextAlign.center,
+          style: textStyle,
+        ),
       ),
       onWillPop: () {
         setState(() {
