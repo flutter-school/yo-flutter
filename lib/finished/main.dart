@@ -21,7 +21,7 @@ class YoApp extends StatelessWidget {
         brightness: Brightness.dark,
         accentColor: Color(0xFFF67280),
       ),
-      home: new ScopedModelDescendant<SessionModel>(
+      home: ScopedModelDescendant<SessionModel>(
         builder: (BuildContext context, Widget child, SessionModel model) {
           if (!model.initialized) {
             // kind of splash screen, before we know if the user is signed in or not

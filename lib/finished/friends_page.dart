@@ -19,7 +19,7 @@ class _FriendsPageState extends State<FriendsPage> {
     if (model == null || model.userModel != userModel) {
       model = FriendsModel(userModel);
     }
-    return new ScopedModel<FriendsModel>(
+    return ScopedModel<FriendsModel>(
       model: model,
       child: _FriendsPageContent(),
     );
@@ -103,7 +103,7 @@ class _FriendsPageStateContent extends State<_FriendsPageContent>
   }
 
   Widget _buildListView() {
-    return new ScopedModelDescendant<FriendsModel>(
+    return ScopedModelDescendant<FriendsModel>(
       builder: (BuildContext context, Widget child, FriendsModel model) {
         if (model.isLoading) {
           return Center(

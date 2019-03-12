@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
-import 'package:yo/finished/friends_page.dart';
-import 'package:yo/finished/login_page.dart';
-import 'package:yo/finished/session_model.dart';
 
 Future<void> main() async {
   runApp(YoApp());
