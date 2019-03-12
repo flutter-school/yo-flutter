@@ -201,6 +201,15 @@ Rewrite the `FriendsModel` using immutable collections from [kt.dart](https://gi
 
 Please note that this code is not production ready, it should just show how quick you could build a million dollar app for Android and iOS 😉
 
+
+## Finished app
+
+If you run into trouble we have a working example for you. Run
+
+```bash
+flutter run lib/finished/finished.dart
+```
+
 ## License
 
 ```
