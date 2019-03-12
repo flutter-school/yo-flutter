@@ -3,14 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/person.dart';
-import 'package:yo/session_model.dart';
+import 'package:yo/finished/finished_session_model.dart';
 
 class FinishedFriendsModel extends Model {
   /// Easy access to this model using [ScopedModel.of]
   static FinishedFriendsModel of(BuildContext context) =>
       ScopedModel.of<FinishedFriendsModel>(context);
 
-  FinishedFriendsModel(this.userModel) {
+  FinishedFriendsModel(this.sessionModel) {
     _loadFriends();
   }
 
@@ -19,12 +19,12 @@ class FinishedFriendsModel extends Model {
 
   bool get isLoading => _friends == null;
 
-  SessionModel userModel;
+  FinishedSessionModel sessionModel;
 
   DateTime _lastYoSent = DateTime(0);
 
   Future<void> sendYo(Person person) async {
-    if (!userModel.isUserLoggedIn) {
+    if (!sessionModel.isUserLoggedIn) {
       throw "not logged in ";
     }
     if (DateTime.now().difference(_lastYoSent).inSeconds < 5) {
@@ -33,7 +33,7 @@ class FinishedFriendsModel extends Model {
     _lastYoSent = DateTime.now();
     await http
         .get('https://us-central1-yo-flutter-80f0f.cloudfunctions.net/sendYo?'
-            'fromUid=${userModel.uid}&toUid=${person.uid}');
+            'fromUid=${sessionModel.uid}&toUid=${person.uid}');
   }
 
   Future<void> _loadFriends() async {

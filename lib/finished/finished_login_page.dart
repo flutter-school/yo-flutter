@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:yo/session_model.dart';
+import 'package:yo/finished/finished_session_model.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -56,8 +56,9 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      await ScopedModel.of<SessionModel>(context).googleLogin();
+      await ScopedModel.of<FinishedSessionModel>(context).googleLogin();
     } catch (e) {
+      print("Error logging in $e");
       setState(() {
         _isLoading = false;
       });

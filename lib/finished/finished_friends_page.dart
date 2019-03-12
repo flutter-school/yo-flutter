@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/finished/finished_friends_model.dart';
+import 'package:yo/finished/finished_session_model.dart';
 import 'package:yo/person.dart';
-import 'package:yo/session_model.dart';
 
 class FriendsPage extends StatefulWidget {
   @override
@@ -15,8 +15,8 @@ class _FriendsPageState extends State<FriendsPage> {
   @override
   Widget build(BuildContext context) {
     final userModel =
-        ScopedModel.of<SessionModel>(context, rebuildOnChange: false);
-    if (model == null || model.userModel != userModel) {
+        ScopedModel.of<FinishedSessionModel>(context, rebuildOnChange: false);
+    if (model == null || model.sessionModel != userModel) {
       model = FinishedFriendsModel(userModel);
     }
     return ScopedModel<FinishedFriendsModel>(
@@ -132,7 +132,7 @@ class _FriendsPageStateContent extends State<_FriendsPageContent>
         padding: const EdgeInsets.all(8.0),
         child: RaisedButton(
           onPressed: () {
-            ScopedModel.of<SessionModel>(context).logout();
+            ScopedModel.of<FinishedSessionModel>(context).logout();
           },
           child: Text("Logout",
               style: Theme.of(context)
