@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:yo/finished/finished_friends_model.dart';
+import 'package:yo/friends_model.dart';
 import 'package:yo/person.dart';
 import 'package:yo/session_model.dart';
 
@@ -16,35 +18,40 @@ class YoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Yo!',
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          accentColor: Color(0xFFF67280),
-        ),
-        home: Scaffold(
-          body: ScopedModelDescendant<SessionModel>(
-            builder: (BuildContext context, Widget child, SessionModel model) {
-              if (!model.initialized) {
-                return Container(
-                  color: Color(0xFF6C5B7B),
-                  child: Center(
-                    child: SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: CircularProgressIndicator(),
-                    ),
+      title: 'Yo!',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        accentColor: Color(0xFFF67280),
+      ),
+      home: Scaffold(
+        body: ScopedModelDescendant<SessionModel>(
+          builder: (BuildContext context, Widget child, SessionModel model) {
+            if (!model.initialized) {
+              return Container(
+                color: Color(0xFF6C5B7B),
+                child: Center(
+                  child: SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: CircularProgressIndicator(),
                   ),
-                );
-              }
+                ),
+              );
+            }
 
-              if (model.isUserLoggedIn) {
-                return FriendsListPage();
-              } else {
-                return LoginPage();
-              }
-            },
-          ),
-        ));
+            if (model.isUserLoggedIn) {
+              // register a Page-scope based model
+              return ScopedModel<FriendsModel>(
+                model: FriendsModel(model),
+                child: FriendsListPage(),
+              );
+            } else {
+              return LoginPage();
+            }
+          },
+        ),
+      ),
+    );
   }
 }
 
@@ -83,27 +90,6 @@ class FriendsListPage extends StatefulWidget {
 }
 
 class _FriendsListPageState extends State<FriendsListPage> {
-  final List<Person> _friends = [
-    Person("ffff", "Frederik Schweiger",
-        "https://pbs.twimg.com/profile_images/1074391975820972033/SP7txc1D_400x400.jpg"),
-    Person("pppp", "Pascal Welsch",
-        "https://pbs.twimg.com/profile_images/941273826557677568/wCBwklPP_400x400.jpg"),
-    Person("gggg", "Georg Bednorz",
-        "https://pbs.twimg.com/profile_images/1091439933716381701/PIfcpdHq_400x400.png"),
-    Person("ssss", "Seth Ladd",
-        "https://pbs.twimg.com/profile_images/986316447293952000/oZWVUWDs_400x400.jpg"),
-    Person("kkkk", "Kate Lovett",
-        "https://pbs.twimg.com/profile_images/1048927764156432384/JxEqQ9dX_400x400.jpg"),
-    Person("tttt", "Tim Sneath",
-        "https://pbs.twimg.com/profile_images/653618067084218368/XlQA-oRl_400x400.jpg"),
-    Person("hhhh", "Filip Hráček",
-        "https://pbs.twimg.com/profile_images/796079953079111680/ymD9DY5g_400x400.jpg"),
-    Person("aaaa", "Andrew Brogdon",
-        "https://pbs.twimg.com/profile_images/651444930884186112/9vlhNFlu_400x400.png"),
-    Person("nnnn", "Nitya Narasimhan",
-        "https://pbs.twimg.com/profile_images/988808912504733697/z03gHVFL_400x400.jpg"),
-  ];
-
   List<Color> _colors = [
     Color(0xFFF8B195),
     Color(0xFFF67280),
@@ -117,7 +103,10 @@ class _FriendsListPageState extends State<FriendsListPage> {
     return Material(
       color: color,
       child: InkWell(
-        onTap: () => print('Tapped ${person.name}'),
+        onTap: () {
+          print('Tapped ${person.name}');
+          FriendsModel.of(context).sendYo(person);
+        },
         child: Container(
           height: 128,
           alignment: Alignment.centerLeft,
@@ -148,10 +137,17 @@ class _FriendsListPageState extends State<FriendsListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) =>
-          _createListItem(_friends[index], _colors[index % 5]),
-      itemCount: _friends.length,
+    // Access the model an register for changes. This will make call the
+    // ScopedModelDescendant.builder function again
+    return ScopedModelDescendant<FriendsModel>(
+      builder: (BuildContext context, Widget child, FriendsModel model) {
+        return ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return _createListItem(model.friends[index], _colors[index % 5]);
+          },
+          itemCount: model.friends.length,
+        );
+      },
     );
   }
 }
