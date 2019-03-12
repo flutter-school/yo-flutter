@@ -111,8 +111,11 @@ stream.listen((QuerySnapshot snapshot) {
 
 Send push notifications
 
-Register after successful login
+Register for firebase notifications after successful login
 ```dart
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+
 final fmToken = await FirebaseMessaging().getToken();
 Firestore.instance
     .collection("tokens")

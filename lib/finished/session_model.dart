@@ -3,7 +3,6 @@ import 'dart:core';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -39,7 +38,6 @@ class SessionModel extends Model {
     print("Saved to DB");
     _user = await FirebaseAuth.instance.currentUser();
     notifyListeners();
-    _registerPush();
   }
 
   Future<void> logout() async {
@@ -50,9 +48,6 @@ class SessionModel extends Model {
 
   Future<void> _autoLogin() async {
     _user = await FirebaseAuth.instance.currentUser();
-    if (_user != null) {
-      _registerPush();
-    }
     _initLoginDone = true;
     notifyListeners();
   }
@@ -63,17 +58,5 @@ class SessionModel extends Model {
         .collection(Person.REF)
         .document(user.uid)
         .setData(signedInUser.toJson());
-  }
-
-  Future<void> _registerPush() async {
-    if (_user == null) {
-      throw "Not implemented";
-    }
-    final fmToken = await FirebaseMessaging().getToken();
-    Firestore.instance
-        .collection("tokens")
-        .document(_user.uid)
-        .setData({'token': fmToken});
-    print("registered firebase messaging for ${_user.email}");
   }
 }
