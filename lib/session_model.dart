@@ -56,6 +56,7 @@ class SessionModel extends Model {
 
   Future<void> _autoLogin() async {
     _user = await FirebaseAuth.instance.currentUser();
+    await Future.delayed(Duration(seconds: 2));
     _initLoginDone = true;
     notifyListeners();
   }

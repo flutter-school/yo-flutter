@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/person.dart';
+import 'package:yo/session_model.dart';
 
 Future<void> main() async {
-  runApp(YoApp());
+  final SessionModel sessionModel = SessionModel();
+
+  runApp(ScopedModel<SessionModel>(
+    model: sessionModel,
+    child: YoApp(),
+  ));
 }
 
 class YoApp extends StatelessWidget {
@@ -15,17 +22,67 @@ class YoApp extends StatelessWidget {
           accentColor: Color(0xFFF67280),
         ),
         home: Scaffold(
-          body: FriendsList(),
+          body: ScopedModelDescendant<SessionModel>(
+            builder: (BuildContext context, Widget child, SessionModel model) {
+              if (!model.initialized) {
+                return Container(
+                  color: Color(0xFF6C5B7B),
+                  child: Center(
+                    child: SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                );
+              }
+
+              if (model.isUserLoggedIn) {
+                return FriendsListPage();
+              } else {
+                return LoginPage();
+              }
+            },
+          ),
         ));
   }
 }
 
-class FriendsList extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   @override
-  _FriendsListState createState() => _FriendsListState();
+  Widget build(BuildContext context) {
+    return Container(
+      color: Color(0xFF6C5B7B),
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Center(
+                child: Text("Yo!", style: Theme.of(context).textTheme.display4),
+              ),
+            ),
+            RaisedButton(
+              child: Text("Google Login"),
+              onPressed: () {
+                print("login");
+                final SessionModel model =
+                    ScopedModel.of<SessionModel>(context);
+                model.googleLogin();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _FriendsListState extends State<FriendsList> {
+class FriendsListPage extends StatefulWidget {
+  @override
+  _FriendsListPageState createState() => _FriendsListPageState();
+}
+
+class _FriendsListPageState extends State<FriendsListPage> {
   final List<Person> _friends = [
     Person("ffff", "Frederik Schweiger",
         "https://pbs.twimg.com/profile_images/1074391975820972033/SP7txc1D_400x400.jpg"),
