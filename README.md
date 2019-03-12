@@ -27,20 +27,20 @@ Create the list layout of your friends. Use the screenshot above as reference.
 Here are some helpful snippets:
 ```dart
 final List<Person> friends = [
-  Person("aaaa", "Frederik Schweiger", "https://lh3.googleusercontent.com/HJalMgJTCQ_Tf3OJrYLrUEYDuY2hQ6vw16Nw9RexsoQyJtl3TaduDICztFsV3-OeGTQqnlOIZlwk9q0=s360-rw-no"),
-  Person("bbbb", "Pascal Welsch", "https://lh3.googleusercontent.com/GtJbCj84PLL8BLTORq_9MDxTR-UUFxwjY7h9dQRZcRrhxQlizifGWE9fZf6hVtlHcx3YSATWhA7qO8M=s360-rw-no"),
-  Person("cccc", "Georg Bednorz", "https://lh3.googleusercontent.com/s4jjTjRsseMEaHhGUYLehPvatrs5h-DDUI7TcJh5RZYUCk73Ggh60IGEXYcxhW795IikC-LN3E9y-1o=s360-rw-no"),
-  Person("dddd", "Seth Ladd", "https://pbs.twimg.com/profile_images/986316447293952000/oZWVUWDs_400x400.jpg"),
-  Person("eeee", "Tim Sneath", "https://pbs.twimg.com/profile_images/653618067084218368/XlQA-oRl_400x400.jpg"),
+    Person("aaaa", "Frederik Schweiger", "https://lh3.googleusercontent.com/HJalMgJTCQ_Tf3OJrYLrUEYDuY2hQ6vw16Nw9RexsoQyJtl3TaduDICztFsV3-OeGTQqnlOIZlwk9q0=s360-rw-no"),
+    Person("bbbb", "Pascal Welsch", "https://lh3.googleusercontent.com/GtJbCj84PLL8BLTORq_9MDxTR-UUFxwjY7h9dQRZcRrhxQlizifGWE9fZf6hVtlHcx3YSATWhA7qO8M=s360-rw-no"),
+    Person("cccc", "Georg Bednorz", "https://lh3.googleusercontent.com/s4jjTjRsseMEaHhGUYLehPvatrs5h-DDUI7TcJh5RZYUCk73Ggh60IGEXYcxhW795IikC-LN3E9y-1o=s360-rw-no"),
+    Person("dddd", "Seth Ladd", "https://pbs.twimg.com/profile_images/986316447293952000/oZWVUWDs_400x400.jpg"),
+    Person("eeee", "Tim Sneath", "https://pbs.twimg.com/profile_images/653618067084218368/XlQA-oRl_400x400.jpg"),
 ];
 
 List<Color> _colors = [
-Color(0xFFF8B195),
-Color(0xFFF67280),
-Color(0xFFC06C84),
-Color(0xFF6C5B7B),
-Color(0xFF355C7D),
-Color(0xFF34495D),
+    Color(0xFFF8B195),
+    Color(0xFFF67280),
+    Color(0xFFC06C84),
+    Color(0xFF6C5B7B),
+    Color(0xFF355C7D),
+    Color(0xFF34495D),
 ];
 ```
 
@@ -128,6 +128,15 @@ Caution:
 - Test on a real device, not the emulator/simulator
 - It doesn't work on iOS unless you've registered you APNs Authentication Key
 
+
+## Bonus 1
+
+Add a logout button to your app. 
+Call `ScopedModel.of<SessionModel>(context).logout();` instead of creating a `ScopedModelDescendant`.
+
+## Bonus 2
+
+Rewrite the `FriendsModel` using immutable collections from [kt.dart](https://github.com/passsy/kt.dart)
 
 ## Disclaimer
 
