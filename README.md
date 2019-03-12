@@ -2,7 +2,7 @@
 
 ![yo_flutter](https://user-images.githubusercontent.com/11478053/49794374-b1a1ce00-fd37-11e8-9364-9ec0efde9ca6.png)
 
-Basically Yo! written in Flutter. Done in a three hour workshop with people who never used Flutter before 🍻
+Basically [Yo!](http://www.justyo.co/) written in Flutter. Done in a three hour workshop with people who never used Flutter before 🍻
 
 ## Lesson 1
 
@@ -23,7 +23,8 @@ Create the list layout of your friends. Use the screenshot above as reference.
 
 1. Create a `FriendsPage` widget. "Screen" are called "Pages" in Flutter.
 2. Use the [`ListView.builder`](https://docs.flutter.io/flutter/widgets/ListView-class.html) widget to show the items. 
-For now, you can use the following data:
+
+Here are some helpful snippets:
 ```dart
 final List<Person> friends = [
   Person("aaaa", "Frederik Schweiger", "https://lh3.googleusercontent.com/HJalMgJTCQ_Tf3OJrYLrUEYDuY2hQ6vw16Nw9RexsoQyJtl3TaduDICztFsV3-OeGTQqnlOIZlwk9q0=s360-rw-no"),
@@ -32,24 +33,65 @@ final List<Person> friends = [
   Person("dddd", "Seth Ladd", "https://pbs.twimg.com/profile_images/986316447293952000/oZWVUWDs_400x400.jpg"),
   Person("eeee", "Tim Sneath", "https://pbs.twimg.com/profile_images/653618067084218368/XlQA-oRl_400x400.jpg"),
 ];
+
+List<Color> _colors = [
+Color(0xFFF8B195),
+Color(0xFFF67280),
+Color(0xFFC06C84),
+Color(0xFF6C5B7B),
+Color(0xFF355C7D),
+Color(0xFF34495D),
+];
 ```
 
 ## Lesson 3
 
+<img height="400px" src="https://user-images.githubusercontent.com/1096485/54165147-c2a9ca80-445f-11e9-8e9e-c1956e17c9ed.png" ></img>
+
 Build the login screen with [scoped_model](https://github.com/brianegan/scoped_model/)
 
+Use the existing `SessionModel` and register it globally in your `main` function.
+Build a Widget which toggles between the `FriedsPage` and a `LoginPage` depending on the session state.
+Use `ScopedModelDescendant` to access the `SessionModel`
 
-## Lesson 4
+```dart
+ScopedModelDescendant<SessionModel>(
+    builder: (BuildContext context, Widget child, SessionModel model) {
+      // TODO use model
+      return anyWidget;
+    },
+),
+```
 
-Setup firebase
+Lear how ScopedModel works under the hood: [InheritedWidgets and App-scope/Page-scope](https://medium.com/@mehmetf_71205/inheriting-widgets-b7ac56dbbeb1)
 
-- Create Android and iOS apps.
-- Enable Google Authentication
-- Deploy firebase functions
+## Lesson 4 (optional)
+
+We want to send YO!s to each other via push notifications. 
+You need a apple developer account to make it work with iOS.
+For now, we'll focus on Android to receive the notifications.
+
+The android project is already fully connected to a instance firebase. 
+If you want full access you have to create your own firebase project.
+
+- Create the Android app
+    - applicationId `school.flutter.yo`
+    - SHA-1 `D2:6E:E8:94:62:5E:1D:74:C7:84:26:0A:32:8A:4E:26:2D:DD:FE:E4` (for existing key `flutterschool.jks`)
+- Create the iOS apps with `school.flutter.yo` as bundleId
+- Enable Google Authentication (`Develop -> Authentication -> Sign-in method -> Goolge -> Enable`) 
+- Deploy firebase cloud functions, see `fireabse/README.md`
 
 ## Lesson 5
 
 Show real users form firebase
+
+1. Refactor your static `FriendsPage` and load your Friends from firebase.
+```dart
+final stream = Firestore.instance.collection(Person.REF).orderBy("name").snapshots();
+stream.listen((QuerySnapshot snapshot) {
+  final friends = snapshot.documents.map((data) => Person.fromJson(data.data));
+});
+```
 
 ## Lesson 6
 
