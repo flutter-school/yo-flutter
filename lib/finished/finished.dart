@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:yo/finished/friends_page.dart';
-import 'package:yo/finished/login_page.dart';
-import 'package:yo/finished/session_model.dart';
+import 'package:yo/finished/finished_friends_page.dart';
+import 'package:yo/finished/finished_login_page.dart';
+import 'package:yo/session_model.dart';
 
 Future<void> main() async {
-  SessionModel loginModel = SessionModel();
+  final SessionModel loginModel = SessionModel();
   runApp(ScopedModel<SessionModel>(
     model: loginModel,
     child: YoApp(),

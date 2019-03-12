@@ -55,7 +55,7 @@ class _SplashState extends State<Splash> {
         child: mastered ? _finished(context) : _fab(context),
       )
     ];
-    
+
     return Container(
       color: Color(0xFF6C5B7B),
       child: Center(

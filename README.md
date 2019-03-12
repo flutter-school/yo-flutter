@@ -24,6 +24,8 @@ Create the list layout of your friends. Use the screenshot above as reference.
 1. Create a `FriendsPage` widget. "Screen" are called "Pages" in Flutter.
 2. Use the [`ListView.builder`](https://docs.flutter.io/flutter/widgets/ListView-class.html) widget to show the items. 
 
+Use the existing `Person` data class in `person.dart`.
+
 Here are some helpful snippets:
 ```dart
 final List<Person> friends = [
@@ -37,6 +39,7 @@ final List<Person> friends = [
     Person("aaaa", "Andrew Brogdon", "https://pbs.twimg.com/profile_images/651444930884186112/9vlhNFlu_400x400.png"),
     Person("nnnn", "Nitya Narasimhan", "https://pbs.twimg.com/profile_images/988808912504733697/z03gHVFL_400x400.jpg"),
 ];
+
 List<Color> _colors = [
     Color(0xFFF8B195),
     Color(0xFFF67280),
@@ -53,7 +56,15 @@ List<Color> _colors = [
 
 Build the login screen with [scoped_model](https://github.com/brianegan/scoped_model/)
 
-Use the existing `SessionModel` and register it globally in your `main` function.
+Use the existing `SessionModel` in `session_model.dart` and register it globally in your `main` function.
+
+```dart
+final SessionModel sessionModel = SessionModel();
+runApp(ScopedModel<SessionModel>(
+  model: sessionModel,
+  child: YoApp(),
+  ));
+```
 
 Build a Widget which toggles between the `FriedsPage` and a `LoginPage` depending on the session state.
 Use `ScopedModelDescendant` to access the `SessionModel`
@@ -152,7 +163,6 @@ Register for firebase notifications after successful login
 ```dart
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-
 final fmToken = await FirebaseMessaging().getToken();
 Firestore.instance
     .collection("tokens")
@@ -160,7 +170,13 @@ Firestore.instance
     .setData({'token': fmToken})
 ```
 
+Tip: `print` a message with the users email address after successfully writing the token to firebase. 
+
+## Lesson 7
+
 Send yo! to another user
+
+Implement `FriendsModel.sendYo` and call the firebase cloud function to notify other users that you think about them
 ```dart
 await http.get('https://us-central1-yo-flutter-80f0f.cloudfunctions.net/sendYo?'
     'fromUid=${userModel.uid}&toUid=${person.uid}');

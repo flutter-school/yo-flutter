@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/finished/finished_friends_model.dart';
 import 'package:yo/person.dart';
-import 'package:yo/finished/session_model.dart';
+import 'package:yo/session_model.dart';
 
 class FriendsPage extends StatefulWidget {
   @override
@@ -104,7 +104,8 @@ class _FriendsPageStateContent extends State<_FriendsPageContent>
 
   Widget _buildListView() {
     return ScopedModelDescendant<FinishedFriendsModel>(
-      builder: (BuildContext context, Widget child, FinishedFriendsModel model) {
+      builder:
+          (BuildContext context, Widget child, FinishedFriendsModel model) {
         if (model.isLoading) {
           return Center(
             child: CircularProgressIndicator(),

@@ -17,15 +17,22 @@ class SessionModel extends Model {
     _autoLogin();
   }
 
+  /// the user model when a user is singed in. Otherwise `null`
   FirebaseUser _user;
 
+  /// `true` when the user is signed in
   bool get isUserLoggedIn => _user != null;
 
+  /// `true` after the sign in initialization is done and this model actually
+  /// known whether the user is signed in or not.
   bool get initialized => _initLoginDone;
   bool _initLoginDone = false;
 
+  /// the unique id of the signed in user or `null` when signed out
   String get uid => _user?.uid;
 
+  /// starts the Google login flow, completes without error when sign in was
+  /// successful.
   Future<void> googleLogin() async {
     GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication googleAuth = await googleUser.authentication;
@@ -40,6 +47,7 @@ class SessionModel extends Model {
     notifyListeners();
   }
 
+  /// signs the user out of the app
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
     _user = null;
