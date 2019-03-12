@@ -41,7 +41,7 @@ android {
     }
 
     signingConfigs {
-        release {
+        flutterschool {
             storeFile file("flutterschool.jks")
             storePassword 'flutterschool'
             keyAlias 'yo'
@@ -51,7 +51,10 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.flutterschool
+        }
+        debug {
+            signingConfig signingConfigs.flutterschool
         }
     }
 }

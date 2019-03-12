@@ -21,6 +21,10 @@
             "package_name": "school.flutter.yo",
             "certificate_hash": "d26ee894625e1d74c784260a328a4e262dddfee4"
           }
+        },
+        {
+          "client_id": "757213870837-95gbp73lol0v452dv15pgt5kglfsr8ge.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
