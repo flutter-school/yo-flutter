@@ -41,12 +41,11 @@ android {
     }
 
     signingConfigs {
-        // TODO: Replace with your own keystore info
         release {
-            storeFile file("yo.keystore")
-            storePassword 'playtheyoyo'
-            keyAlias 'timssecretkey'
-            keyPassword 'playtheyoyo'
+            storeFile file("flutterschool.jks")
+            storePassword 'flutterschool'
+            keyAlias 'yo'
+            keyPassword 'flutterschool'
         }
     }
 
