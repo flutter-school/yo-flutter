@@ -78,7 +78,16 @@ If you want full access you have to create your own firebase project.
     - applicationId `school.flutter.yo`
     - SHA-1 `D2:6E:E8:94:62:5E:1D:74:C7:84:26:0A:32:8A:4E:26:2D:DD:FE:E4` (for existing key `flutterschool.jks`)
 - (Create the iOS apps with `school.flutter.yo` as bundleId)
+
+
+- Download the firebase configuration files to
+    - `android/app/google-services.json` 
+    - `ios/Runner/GoogleService-Info.plist`
+    On iOS you need to edit `ios/Runner/Info.plist` and paste in your `REVERSED_CLIENT_ID`.
+
 - Enable Google Authentication (`Develop -> Authentication -> Sign-in method -> Goolge -> Enable`) 
+
+
 
 - Deploy firebase cloud functions, see `fireabse/README.md`
 
