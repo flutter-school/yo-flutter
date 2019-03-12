@@ -120,29 +120,24 @@ Caution:
 - It doesn't work on iOS unless you've registered you APNs Authentication Key
 
 
-## How to build the app
-
-> Are you in a hurry and just want to check out the end-result on your phone? In the [releases tab](https://github.com/flschweiger/yo-flutter/releases/tag/1.0) you will find a precompiled APK to download 🚀
-
-If you would like to compile the code and run the app on your machine, you will have to create a new Firebase project and make sure to add the following files:
-
-1. Create a new firebase project https://console.firebase.google.com
-2. Register the ios and android application 
-   
-On Android, register the SHA-1 of your local certificate to Firebase to make Google Sign-In work.
-> `keytool -exportcert -list -v \
--alias androiddebugkey -keystore ~/.android/debug.keystore`
-
-and download the firebase configuration files to
-- `ios/Runner/GoogleService-Info.plist`
-- `android/app/google-services.json`  
-
-3. Setup Firebase Authentication: Go to `Develop -> Authentication` and set up sign-in method  
-
-On iOS you need to edit `ios/Runner/Info.plist` and paste in your `REVERSED_CLIENT_ID`.
-
-Last but not least you will have to deploy the Cloud Function inside the `firebase` folder and replace the URL inside the `home_page.dart` file. And voilà, you are all set!
-
 ## Disclaimer
 
 Please note that this code is not production ready, it should just show how quick you could build a million dollar app for Android and iOS 😉
+
+## License
+
+```
+Copyright 2019 flutter.school
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
