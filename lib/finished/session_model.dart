@@ -7,7 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:yo/finished/person.dart';
+import 'package:yo/person.dart';
 
 class SessionModel extends Model {
   /// Easy access to this model using [ScopedModel.of]

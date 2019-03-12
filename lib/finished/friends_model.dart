@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:scoped_model/scoped_model.dart';
-import 'package:yo/finished/person.dart';
+import 'package:yo/person.dart';
 import 'package:yo/finished/session_model.dart';
 
 class FriendsModel extends Model {
