@@ -15,7 +15,7 @@ Flutter install instructions:
 
 If you have trouble setting up flutter, ask for support
 
-You've finished this lessen if you see 
+You've finished this lessen if you see the congratulations screen on your phone.
 
 ## Lesson 2
 
