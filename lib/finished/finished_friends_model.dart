@@ -5,12 +5,12 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:yo/person.dart';
 import 'package:yo/finished/session_model.dart';
 
-class FriendsModel extends Model {
+class FinishedFriendsModel extends Model {
   /// Easy access to this model using [ScopedModel.of]
-  static FriendsModel of(BuildContext context) =>
-      ScopedModel.of<FriendsModel>(context);
+  static FinishedFriendsModel of(BuildContext context) =>
+      ScopedModel.of<FinishedFriendsModel>(context);
 
-  FriendsModel(this.userModel) {
+  FinishedFriendsModel(this.userModel) {
     _loadFriends();
   }
 

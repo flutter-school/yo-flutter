@@ -54,6 +54,7 @@ List<Color> _colors = [
 Build the login screen with [scoped_model](https://github.com/brianegan/scoped_model/)
 
 Use the existing `SessionModel` and register it globally in your `main` function.
+
 Build a Widget which toggles between the `FriedsPage` and a `LoginPage` depending on the session state.
 Use `ScopedModelDescendant` to access the `SessionModel`
 
@@ -99,8 +100,44 @@ If you want full access you have to create your own firebase project.
 Show real users form firebase
 
 1. Refactor your static `FriendsPage` and load your Friends from firebase. 
-Don't put the Firebase loading code in the UI, create a page-scoped model (`FriendsModel`).
+Don't put the Firebase loading code in the UI, create a page-scoped model (`FriendsModel`). 
+
+Here's some code for you to start
 ```dart
+class FriendsModel extends Model {
+  /// Easy access to this model using [ScopedModel.of]
+  static FriendsModel of(BuildContext context) =>
+      ScopedModel.of<FriendsModel>(context);
+
+  FriendsModel(this.userModel) {
+    _loadFriends();
+  }
+
+  List<Person> get friends => _friends?.toList() ?? [];
+  Iterable<Person> _friends;
+
+  bool get isLoading => _friends == null;
+
+  SessionModel userModel;
+
+  Future<void> sendYo(Person person) async {
+    // TODO
+    throw "not implemented";
+  }
+
+  Future<void> _loadFriends() async {
+    // TODO
+    throw "not implemented";
+  }
+}
+```
+
+Now implement the data loading. 
+This is how you get your friends form firebase.
+(Don't forget to notify the UI after loading)
+```dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 final stream = Firestore.instance.collection(Person.REF).orderBy("name").snapshots();
 stream.listen((QuerySnapshot snapshot) {
   final friends = snapshot.documents.map((data) => Person.fromJson(data.data));

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:yo/finished/friends_model.dart';
+import 'package:yo/finished/finished_friends_model.dart';
 import 'package:yo/person.dart';
 import 'package:yo/finished/session_model.dart';
 
@@ -10,16 +10,16 @@ class FriendsPage extends StatefulWidget {
 }
 
 class _FriendsPageState extends State<FriendsPage> {
-  FriendsModel model;
+  FinishedFriendsModel model;
 
   @override
   Widget build(BuildContext context) {
     final userModel =
         ScopedModel.of<SessionModel>(context, rebuildOnChange: false);
     if (model == null || model.userModel != userModel) {
-      model = FriendsModel(userModel);
+      model = FinishedFriendsModel(userModel);
     }
-    return ScopedModel<FriendsModel>(
+    return ScopedModel<FinishedFriendsModel>(
       model: model,
       child: _FriendsPageContent(),
     );
@@ -65,7 +65,7 @@ class _FriendsPageStateContent extends State<_FriendsPageContent>
       color: color,
       child: InkWell(
         onTap: () {
-          FriendsModel.of(context).sendYo(person).then((_) {
+          FinishedFriendsModel.of(context).sendYo(person).then((_) {
             _showSnackbar("Yo sent to ${person.name} ✌");
           }).catchError((e) {
             if (e is SpammyException) {
@@ -103,8 +103,8 @@ class _FriendsPageStateContent extends State<_FriendsPageContent>
   }
 
   Widget _buildListView() {
-    return ScopedModelDescendant<FriendsModel>(
-      builder: (BuildContext context, Widget child, FriendsModel model) {
+    return ScopedModelDescendant<FinishedFriendsModel>(
+      builder: (BuildContext context, Widget child, FinishedFriendsModel model) {
         if (model.isLoading) {
           return Center(
             child: CircularProgressIndicator(),
