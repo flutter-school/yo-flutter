@@ -77,15 +77,17 @@ If you want full access you have to create your own firebase project.
 - Create the Android app
     - applicationId `school.flutter.yo`
     - SHA-1 `D2:6E:E8:94:62:5E:1D:74:C7:84:26:0A:32:8A:4E:26:2D:DD:FE:E4` (for existing key `flutterschool.jks`)
-- Create the iOS apps with `school.flutter.yo` as bundleId
+- (Create the iOS apps with `school.flutter.yo` as bundleId)
 - Enable Google Authentication (`Develop -> Authentication -> Sign-in method -> Goolge -> Enable`) 
+
 - Deploy firebase cloud functions, see `fireabse/README.md`
 
 ## Lesson 5
 
 Show real users form firebase
 
-1. Refactor your static `FriendsPage` and load your Friends from firebase.
+1. Refactor your static `FriendsPage` and load your Friends from firebase. 
+Don't put the Firebase loading code in the UI, create a page-scoped model (`FriendsModel`).
 ```dart
 final stream = Firestore.instance.collection(Person.REF).orderBy("name").snapshots();
 stream.listen((QuerySnapshot snapshot) {
@@ -97,10 +99,25 @@ stream.listen((QuerySnapshot snapshot) {
 
 Send push notifications
 
+Register after successful login
+```dart
+final fmToken = await FirebaseMessaging().getToken();
+Firestore.instance
+    .collection("tokens")
+    .document(_user.uid)
+    .setData({'token': fmToken})
+```
+
+Send yo! to another user
+```dart
+await http.get('https://us-central1-yo-flutter-80f0f.cloudfunctions.net/sendYo?'
+    'fromUid=${userModel.uid}&toUid=${person.uid}');
+```
+
 Caution: 
 - You won't see a notification if the app is in foreground
 - Test on a real device, not the emulator/simulator
-- 
+- It doesn't work on iOS unless you've registered you APNs Authentication Key
 
 
 ## How to build the app
